@@ -1,36 +1,18 @@
 const express = require('express');
 const app=express();
+const {Authorization}=require("./middlewares/auth");
 
+app.use("/user",Authorization,(req,res,next)=>{
+    res.send("Welcome to the Dashboard!");
+})
 
-app.use("/",(req,res,next)=>{
-    
-    console.log("Print response 1");
-    next();
-    //res.send("response 1");
-},
-(req,res,next)=>{
-   // res.send("response 2");
-    console.log("print response 2");
-    next();
-}
-,
-[(req,res,next)=>{
-    //res.send("response 3");
-    console.log("print response 3");
-    next();
-}
-,
-(req,res,next)=>{
-   // res.send("response 4");
-    console.log("print response 4");
-    next();
-}
-,
-(req,res,next)=>{
-    res.send("response 5");
-    console.log("print response 5");
-}]
-)
+app.get("/user",(req,res)=>{
+    res.send("user information");
+})
+app.get("/admin/getUserDetails",(req,res)=>{
+    res.send("Welcome to the adminPage");
+})
+
 app.listen(3000,(req,res)=>{
     console.log("Listening on port is 3000");
 })
