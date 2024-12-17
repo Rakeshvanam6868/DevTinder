@@ -2,6 +2,25 @@ const express = require('express');
 const app=express();
 const {Authorization}=require("./middlewares/auth");
 const {connectDB} = require('./config/database');
+const User = require('./models/user')
+
+
+app.post('/signup',async (req,res)=>{
+  const user=new User({
+    firstName:"Rakes",
+    lastName:"Vana",
+    email:"rakeshvana@gmail.com",
+    password: "Raki"
+  });
+  try{
+    await user.save();
+    res.send("user data saved successfully");
+  }catch(e){
+    res.status(400).send("some error is "+ e.message);
+  }
+  
+
+})
 
 connectDB()
    .then(()=>{
