@@ -4,14 +4,9 @@ const {Authorization}=require("./middlewares/auth");
 const {connectDB} = require('./config/database');
 const User = require('./models/user')
 
-
+app.use(express.json());
 app.post('/signup',async (req,res)=>{
-  const user=new User({
-    firstName:"Rakes",
-    lastName:"Vana",
-    email:"rakeshvana@gmail.com",
-    password: "Raki"
-  });
+  const user=new User(req.body);
   try{
     await user.save();
     res.send("user data saved successfully");
